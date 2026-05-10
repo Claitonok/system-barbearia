@@ -38,7 +38,7 @@ public class ServicebarbeariaUsuario {
      * @param barbeariaUsuario
      * @return
      */
-    public BarbeariaUsuario atualizarBarbeariaUsuarioById(int id, BarbeariaUsuario barbeariaUsuario) {
+    public BarbeariaUsuario atualizarBarbeariaUsuarioById(Long id, BarbeariaUsuario barbeariaUsuario) {
          
       Optional<BarbeariaUsuario> barbeariaUsuarioOptional = repositoryBarbeariaUsuario.findById(id);
 
@@ -55,7 +55,7 @@ public class ServicebarbeariaUsuario {
      * @param id
      * @return
      */
-    public BarbeariaUsuario getBarbeariaUsuarioById(int id) {
+    public BarbeariaUsuario getBarbeariaUsuarioById(Long id) {
 
         Optional<BarbeariaUsuario> barbeariaUsuarioOptional = repositoryBarbeariaUsuario.findById(id);
 
@@ -69,7 +69,7 @@ public class ServicebarbeariaUsuario {
      * Exclui um usuário da barbearia do banco de dados.
      * @param id
      */
-    public void deleteBarbeariaUsuario(int id) {
+    public void deleteBarbeariaUsuario(Long id) {
         repositoryBarbeariaUsuario.deleteById(id);
     }
 

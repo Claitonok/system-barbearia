@@ -15,7 +15,7 @@ public class BarbeariaUsuario {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(name = "nome", nullable = false)
     private String nome;

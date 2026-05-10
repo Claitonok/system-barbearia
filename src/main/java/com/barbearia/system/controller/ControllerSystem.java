@@ -138,7 +138,7 @@ public class ControllerSystem {
     }
 
     @PutMapping("/barbearia-atualizar/{id}")
-    public ResponseEntity<?> updateBarbeariaUsuario(@PathVariable int id, @RequestBody BarbeariaUsuario barbeariaUsuario) {
+    public ResponseEntity<?> updateBarbeariaUsuario(@PathVariable Long id, @RequestBody BarbeariaUsuario barbeariaUsuario) {
 
         BarbeariaUsuario existingBarbeariaUsuario = servicebarbeariaUsuario.getBarbeariaUsuarioById(id);
 
@@ -150,7 +150,7 @@ public class ControllerSystem {
     }
 
     @GetMapping("/barbearia-usuario/{id}")
-    public ResponseEntity<?> barbeariaUsuarioById(@PathVariable int id) {
+    public ResponseEntity<?> barbeariaUsuarioById(@PathVariable Long id) {
 
         BarbeariaUsuario barbeariaUsuario = servicebarbeariaUsuario.getBarbeariaUsuarioById(id);
 
@@ -162,7 +162,7 @@ public class ControllerSystem {
     }
 
     @DeleteMapping("/barbearia-deletar/{id}")
-    public ResponseEntity<?> deleteBarbeariaUsuario(@PathVariable int id) {
+    public ResponseEntity<?> deleteBarbeariaUsuario(@PathVariable Long id) {
 
         try {
             BarbeariaUsuario barbeariaUsuario = servicebarbeariaUsuario.getBarbeariaUsuarioById(id);
