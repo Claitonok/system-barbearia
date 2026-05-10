@@ -25,7 +25,7 @@ import com.barbearia.system.service.ServicebarbeariaUsuario;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/application/json")
+@RequestMapping("/barbearia/json")
 public class ControllerSystem {
 
     @Autowired
@@ -68,7 +68,7 @@ public class ControllerSystem {
 
     }
 
-    @PostMapping("/admin/login")
+    @PostMapping("/admin-login")
     public ResponseEntity<?> login(@RequestBody UsuarioAdmin usuarioAdmin) {
 
         String token = authService.loginService(usuarioAdmin.getEmail(), usuarioAdmin.getSenha());
@@ -93,7 +93,12 @@ public class ControllerSystem {
 
         if (usuarioAdmin != null) {
             authService.recoverPassword(request.getEmail());
-            return new ResponseEntity<>(HttpStatus.OK);
+
+            Map<String, Object> respoRecoMap = new HashMap<>();
+            respoRecoMap.put("success", true);
+            respoRecoMap.put("message", "Código enviado com sucesso");
+
+            return new ResponseEntity<>(respoRecoMap, HttpStatus.OK);
         }
         return ResponseEntity.status(404).body("Email não encontrado");
     }
@@ -104,8 +109,12 @@ public class ControllerSystem {
         authService.resetPassword(
                 usuarioAdmin.getResetToken(),
                 usuarioAdmin.getSenha());
+        
+        Map<String, Object> respoResetMap = new HashMap<>();
+        respoResetMap.put("success", true);
+        respoResetMap.put("message", "Senha recuperada com sucesso");
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(respoResetMap, HttpStatus.OK);
     }
 
 

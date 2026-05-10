@@ -34,6 +34,7 @@ public class SecurityConfig {
 
             .httpBasic(Customizer.withDefaults())
             .formLogin(Customizer.withDefaults())
+            .cors(Customizer.withDefaults())
             .userDetailsService(myUserDetailsService)
             .logout(logout -> logout
             .logoutUrl("/logout")
