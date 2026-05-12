@@ -28,30 +28,34 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .anyRequest().authenticated())
-
+        http.csrf(csrf -> csrf.disable()).authorizeHttpRequests(auth -> auth
+            // 1. Libera o endpoint de criação de usuário de segurança
+            // Após criar seu usuário, você pode mudar para .authenticated() ou remover esta linha
+                .requestMatchers("/api/auth/config/**").permitAll()
+            //---------------------------------------------------------//    
+                .anyRequest().authenticated()
+            )
+            
             .httpBasic(Customizer.withDefaults())
             .formLogin(Customizer.withDefaults())
             .cors(Customizer.withDefaults())
             .userDetailsService(myUserDetailsService)
+
             .logout(logout -> logout
-            .logoutUrl("/logout")
-            .logoutSuccessUrl("/login?logout") // Redireciona para o login após sair
-            .invalidateHttpSession(true)
-            .deleteCookies("JSESSIONID")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout") // Redireciona para o login após sair
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
         )
 
             // Limita a sessão a um único login por usuário
             .sessionManagement(session -> session
-                
                 // Impede que o usuário faça login em outro dispositivo se já estiver logado
                 .maximumSessions(2) // Permite no máximo 2 sessões por usuário
-
                 // Se quiser permitir que o usuário faça login em outro dispositivo,
                 //  mas expire a sessão anterior, use .maxSessionsPreventsLogin(false)
-                .maxSessionsPreventsLogin(false));
+                .maxSessionsPreventsLogin(false)
+            );
 
 
         return http.build();

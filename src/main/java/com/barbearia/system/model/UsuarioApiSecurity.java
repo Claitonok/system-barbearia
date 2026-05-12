@@ -15,7 +15,7 @@ public class UsuarioApiSecurity {
     @GeneratedValue(strategy = GenerationType.AUTO)
 
     @Column(name = "id", nullable = false)
-    private int id;
+    private Long id;
 
     @Column(unique = true, nullable = false)
     private String username;
